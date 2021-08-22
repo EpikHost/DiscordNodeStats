@@ -1,0 +1,22 @@
+{
+  "name": "discordnodestats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsnotrin/DiscordNodeStats.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsnotrin/DiscordNodeStats/issues"
+  },
+  "homepage": "https://github.com/itsnotrin/DiscordNodeStats#readme",
+  "dependencies": {
+    "discord.js": "^13.1.0"
+  }
+}
