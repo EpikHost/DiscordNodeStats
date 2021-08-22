@@ -19,28 +19,29 @@ async function ping(interaction) {
     await interaction.reply({ embeds: [embed], ephemeral: true });
 }
 
+
+
 async function stats(interaction){
     //Define the urls
-    let NodeOneCpuURL = 'http://127.0.0.1:5000/cpuusage'
-    let NodeOneRamURL = 'http://127.0.0.1:5000/ramusage'
+    let NodeOneURL = 'http://127.0.0.1:5000/all'
     
     //Fetch CPU Usage Info
-    axios.get(NodeOneCpuURL)
-    .then(function(response) {
-        let NodeOneCpuData = response["data"]
-        let NodeOneCpuSage = NodeOneCpuData["data"]
-        console.log(cpuusage)
-    let embed = new MessageEmbed()
-    .setTitle("Node One Stats!")
-    .addFields(
-        {"title": "CPU Usage", "description": `${cpuusage}%!`},
-        {"title": "RAM Usage", "description": `${ramusage}%!`}
-        )
-    })
+    await axios.get(NodeOneURL)
+    .then(async function(response) {
+        let info = response["data"]
+        let cpu_percentage = info["cpu_percent"]
+        let ram_usage = info["ram_usage"]
+        let embed = new MessageEmbed()
+        .setTitle("Node One Stats!")
+        .addFields(
+            {"name": "CPU Usage", "value": `${cpu_percentage}%!`},
+            {"name": "RAM Usage", "value": `${ram_usage}%!`}
+            )
+        await interaction.reply({ embeds: [embed], ephemeral: true });
 
-    //Fetch RAM Usage Info
-    axios.get(NodeOneRamURL)
 
+
+    });
 }
 
 
@@ -52,7 +53,7 @@ client.on('interactionCreate', async interaction => {
 	if (commandName === 'ping') {
 		ping(interaction);
 	} else if (commandName === 'stats') {
-		NodeOneCPU(interaction);
+		stats(interaction);
     }
 });
 
